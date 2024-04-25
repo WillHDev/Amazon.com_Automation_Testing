@@ -12,43 +12,29 @@ describe('Amazon Home Page', () => {
     });
 
     it('Search Content and Verify Text', async () => {
+        await browser.url('/');
         await $('#twotabsearchtextbox').addValue('macbook');
         await $('input[type="submit"]').click();
-
-
-    // it('Search Content and Verify Text', async () => {
-    //     await page.searchInput.addValue('macbook');
-    //     await page.submitButton.click();
 
         //Tip: Use text containing because actual text is in quotes on the amazon page
         await expect($('.a-color-state.a-text-bold')).toHaveTextContaining('macbook');
     });
 
-
-    it('It clicks on search bar and selects first auto suggestion, then verifies text', async () => {
-
+    it.only('Auto Suggestion', async () => {
+        await browser.url('/');
         const searchInput = await $('#twotabsearchtextbox');
-        const suggestionPane = await $('.left-pane-results-container'); 
-        //after that, pick the first div, $$ would give you all of the divs that are there
-        const firstSearchText= await suggestionPane.$('div');
-        const expectedSeachText = await $('a-color-state a-text-bold');
-        //const firstAutoSuggestion = await $('#s-suggestion-trending-container').$$('span[id*=s-heavy]').value[0];
-        //firstAutoSuggestion.click();
+        const suggestionPane = await $('.left-pane-results-container');
+        const firstSearchResult = await suggestionPane.$('div');
+        const expectedSearchText = await $('.a-color-state.a-text-bold');
+    
         await searchInput.click();
-        //this replaces the pauses
+        await browser.pause(500);
         await expect(suggestionPane).toBeDisplayed();
-        //await browser.pause(1000);
-        // await expect($('a-color-state a-text-bold')).toHaveTextContaining(firstAutoSuggestion.toString());
-
         await browser.keys('ArrowDown');
-        const expectedText = firstSearchResult.getText();
-
-        //TODO: await browser.pause(1000); > don't need this anymore - why?
+        const expectedText = await firstSearchResult.getText();
         await browser.keys('Enter');
-        //await browser.pause(5000);
-        await expect(firstSearchText.toHaveTextContaining(expectedText));
+        await expect(expectedSearchText).toHaveTextContaining(expectedText);
+      });
 
-
-    });
 });
 
