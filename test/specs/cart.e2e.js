@@ -1,6 +1,6 @@
 import { browser, expect, $ } from '@wdio/globals';
 
-describeAndIt('Cart Flow', () => {
+describe('Cart Flow', () => {
 
   before(async () => {
     await browser.url('/');
@@ -14,15 +14,27 @@ describeAndIt('Cart Flow', () => {
 
   it('Add item to Cart', async () => {
 
-    await $*('.s-product-image-container').click();
+    await $('.s-product-image-container').click();
 
     const devicePrice = (await $('#a-price-whole')).getText();
-    await $('.a-autoid-26-announce').click();
+    await $('#add-to-cart-button').click();
      
 
     await browser.pause(5000);
     //await $$('.s-product-image-container')[0]
     //return first node
+
+    // await $('.s-product-image-container').click();
+    // devicePrice = await $('#corePrice_desktop span[aria-hidden="true"]')
+    //   .getText();
+    // await $('#add-to-cart-button').click();
+    // await expect($('#NATC_SMART_WAGON_CONF_MSG_SUCCESS span'))
+    //   .toHaveText('Added to Cart');
+
+    // const subtotal = await browser.execute(() => {
+    //   return document.querySelector('#sw-subtotal span[class="a-offscreen"]').textContent
+    // })
+    // await expect(subtotal).toEqual(devicePrice);
 
   });
 });
