@@ -16,7 +16,8 @@ describe('Cart Flow', () => {
 
     await $('.s-product-image-container').click();
 
-    const devicePrice = (await $('#a-price-whole')).getText();
+    const devicePrice = await $('.a-price-whole').getText();
+    console.log('PRICE @@@', devicePrice);
     await $('#add-to-cart-button').click();
      
 
