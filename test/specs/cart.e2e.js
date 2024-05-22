@@ -16,7 +16,14 @@ describe('Cart Flow', () => {
 
     await $('.s-product-image-container').click();
 
-    const devicePrice = await $('.a-price-whole').getText();
+    //const devicePrice = await $('.a-price-whole').getText();
+    const devicePrice = 
+    //await $('.a-offscreen').getText();
+    await browser.execute(() => {
+      return document.querySelector('.a-offscreen').textContent
+    });
+
+  
     //console.log('PRICE @@@', devicePrice);
     await $('#add-to-cart-button').click();
      
@@ -32,6 +39,15 @@ describe('Cart Flow', () => {
     // it is not a function
     await expect($('.a-size-medium-plus'))
     .toHaveText('Added to Cart');
+    //await expect($('.sw-subtotal-amount span[class="a-offscreen"]')).toHaveText(devicePrice);
+
+
+    const subtotal = await browser.execute(() => {
+      return document.querySelector('.sw-subtotal-amount span[class="a-offscreen"]').textContent
+    })
+    await expect(subtotal).toEqual(devicePrice);
+    
+  //  await expect($('.a-price-whole')).toHaveText(devicePrice);
    // await $('.a-button').$('.a-button-span12').$('.a-button-base').click();
     //await $('span.*=No Thanks').click(); -  why was element not interactable?
    
