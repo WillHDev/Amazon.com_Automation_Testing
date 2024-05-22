@@ -1,4 +1,4 @@
-import { browser, expect} from '@wdio/globals';
+import { browser, expect, $ } from '@wdio/globals';
 
 // const { page } = require('./page');
 // import { chromedriver_autoinstaller } from chromedriver;

@@ -1,14 +1,31 @@
+import { browser, expect, $ } from '@wdio/globals';
 
-// describeAndIt('Cart Flow', () => {
+describeAndIt('Cart Flow', () => {
 
-//   before(async () => {
+  before(async () => {
+    await browser.url('/');
+    const searchInput = await $('#twotabsearchtextbox');
+    const searchButton =  await $('input[type="submit"]');
+    await searchInput.addValue('macbook');
+    await searchButton.click();
 
-//   });
 
-//   it('Add item to Cart', async () => {
+  });
 
-//   });
-// });
+  it('Add item to Cart', async () => {
+
+    await $*('.s-product-image-container').click();
+
+    const devicePrice = (await $('#a-price-whole')).getText();
+    await $('.a-autoid-26-announce').click();
+     
+
+    await browser.pause(5000);
+    //await $$('.s-product-image-container')[0]
+    //return first node
+
+  });
+});
 
 
 // describeAndIt('Cart Flow', () => {
