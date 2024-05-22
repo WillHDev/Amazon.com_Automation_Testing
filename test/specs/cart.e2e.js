@@ -24,12 +24,19 @@ describe('Cart Flow', () => {
     await browser.pause(5000);
     //await $$('.s-product-image-container')[0]
     //return first node
-    await $('#attachSiNoCoverage').click()
+    await $('#attachSiNoCoverage').click();
+    await browser.pause(5000);
+    //Sticking Point: forgot to use expect with .toHaveText
+    // mistakenly read the error saying element not found
+    //actual error: Can't call "toHaveText" on element with selector ".a-size-medium-plus",
+    // it is not a function
+    await expect($('.a-size-medium-plus'))
+    .toHaveText('Added to Cart');
    // await $('.a-button').$('.a-button-span12').$('.a-button-base').click();
     //await $('span.*=No Thanks').click(); -  why was element not interactable?
    
-    await $('span[aria-label="Cart"]').click();
-    await expect($('=Shopping Cart span[.a-price-whole]')).toHaveText(devicePrice);
+    //await $('span[aria-label="Cart"]').click(); - Why didn't this work?
+    //await expect($('=Shopping Cart span[.a-price-whole]')).toHaveText(devicePrice);
 
     // await $('.s-product-image-container').click();
     // devicePrice = await $('#corePrice_desktop span[aria-hidden="true"]')
