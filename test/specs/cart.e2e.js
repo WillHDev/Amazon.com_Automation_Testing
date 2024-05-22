@@ -17,13 +17,19 @@ describe('Cart Flow', () => {
     await $('.s-product-image-container').click();
 
     const devicePrice = await $('.a-price-whole').getText();
-    console.log('PRICE @@@', devicePrice);
+    //console.log('PRICE @@@', devicePrice);
     await $('#add-to-cart-button').click();
      
-
+    //why does this pause work?
     await browser.pause(5000);
     //await $$('.s-product-image-container')[0]
     //return first node
+    await $('#attachSiNoCoverage').click()
+   // await $('.a-button').$('.a-button-span12').$('.a-button-base').click();
+    //await $('span.*=No Thanks').click(); -  why was element not interactable?
+   
+    await $('span[aria-label="Cart"]').click();
+    await expect($('=Shopping Cart span[.a-price-whole]')).toHaveText(devicePrice);
 
     // await $('.s-product-image-container').click();
     // devicePrice = await $('#corePrice_desktop span[aria-hidden="true"]')
