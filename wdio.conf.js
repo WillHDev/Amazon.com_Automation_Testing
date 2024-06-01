@@ -90,7 +90,7 @@ export const config = {
     //
     // Default timeout for all waitFor* commands.
 
-    baseUrl: 'https://amazon.com/',
+    baseUrl: 'https://amazon.com',
 
 
     waitforTimeout: 10000,
